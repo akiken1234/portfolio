@@ -1,8 +1,8 @@
 FROM node:16.8.0
 FROM nginx:1.21.1
 
-RUN mkdir /web
+RUN mkdir /portfolio
 
-WORKDIR /web
+WORKDIR /portfolio
 
-COPY . /web
+COPY . /portfolio

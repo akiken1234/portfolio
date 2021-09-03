@@ -1,7 +1,7 @@
-FROM --platform=linux/x86_64 mysql:8.0.26
+FROM --platform=linux/x86_64 mysql:8.0
 
-RUN mkdir /portfolio
+# RUN mkdir /portfolio
 
-WORKDIR /portfolio
+# WORKDIR /portfolio
 
-COPY . /portfolio
+# COPY . /portfolio
