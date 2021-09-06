@@ -2,20 +2,11 @@ FROM golang:1.17.0
 
 RUN mkdir /portfolio
 
-WORKDIR /portfolio
+WORKDIR /portfolio/app
 
 COPY . /portfolio
 
-# RUN go get github.com/gin-gonic/gin
-# RUN go get github.com/go-sql-driver/mysql
-# RUN go get github.com/jinzhu/gorm
+RUN go get -u github.com/cosmtrek/air && \
+  go build -o /go/bin/air github.com/cosmtrek/air
 
-# RUN go env -w GO111MODULE=on
-# RUN go get -u github.com/gin-gonic/gin
-
-# CMD [ "go", "run", "main.go" ]
-
-# RUN curl -fLo /go/bin/air https://git.io/linux_air \
-#   && chmod +x /go/bin/air
-
-# CMD air
+CMD ["air", "-c", ".air.toml"]
