@@ -37,10 +37,17 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
   ],
-
+  
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    "@nuxtjs/axios",
   ],
+
+  axios: {
+    proxy: true,
+  },
+
+  mode: "universal",
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

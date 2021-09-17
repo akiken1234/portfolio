@@ -9,7 +9,67 @@
         <v-card-title class="headline">
           Welcome to the Vuetify + Nuxt.js template
         </v-card-title>
-        <v-card-text>
+        <!-- <div>
+          <ul>
+            <li v-for="(post, index) in posts" :key="index">
+              <a :href="'post.url'" target="_blank" rel="noopener noreferrer">{{
+                post.title
+              }}</a>
+            </li>
+          </ul>
+        </div> -->
+        <v-card-actions>
+          <v-spacer />
+          <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-col>
+  </v-row>
+</template>
+
+<script>
+
+export default {
+  async asyncData({ $axios }) {
+    // 取得先のURL
+    // const url = 'https://qiita.com/api/v2/items'
+    const url = 'http://host.docker.internal:8080/papers'
+    // リクエスト（Get）
+    const response = await $axios.$get(url)
+    console.log(response)
+
+    // 配列で返ってくるのでJSONにして返却
+    return {
+      posts: response,
+    }
+  },
+}
+// async asyncData({ $axios }) {
+//   try {
+//     // const data = await $axios.get('http://localhost:8080/users')
+//           const data = await $axios.get('https://qiita.com/api/v2/items')
+
+//     return {json: data}
+//   } catch (err) {
+//     console.error(err)
+//   }
+//   console.log(data)
+// },
+
+// async asyncData({ $axios }) {
+// 	// 取得先のURL
+// 	const url = "/users";
+// 	// リクエスト（Get）
+// 	const response = await $axios.$get(url);
+//   console.log(response)
+// 	// 配列で返ってくるのでJSONにして返却
+// 	// return {
+// 	// 	posts: response
+// 	// };
+// }
+</script>
+
+        <!-- <v-card-text>
           <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
           <p>
             For more information on Vuetify, check out the <a
@@ -60,18 +120,5 @@
           >
             Nuxt GitHub
           </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
-</template>
+        </v-card-text> -->
+

@@ -13,6 +13,4 @@ func main() {
 	db.DB().AutoMigrate(&model.Paper{})
 	db.DB().AutoMigrate(&model.Message{})
 	db.DB().AutoMigrate(&model.Comment{})
-}	
-
-		
+}

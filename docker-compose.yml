@@ -6,6 +6,8 @@ services:
       context: ./
       dockerfile: go/Dockerfile
     tty: true
+    environment:
+      TZ: Asia/Tokyo 
     volumes:
       - ./go/:/go/src/github.com/akimotokensaku/portfolio/go
     ports:
@@ -15,15 +17,13 @@ services:
   
   db:
     container_name: db
-    build:
-      context: ./
-      dockerfile: db/Dockerfile
+    image: mysql:8.0
+    platform: linux/x86_64
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: database
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-      MYSQL_ROLE: role
       TZ: 'Asia/Tokyo'
     volumes:
       - ./db/my.cnf:/etc/mysql/conf.d/my.cnf

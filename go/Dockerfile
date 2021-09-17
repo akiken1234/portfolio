@@ -1,4 +1,4 @@
-FROM golang:1.16.0-alpine
+FROM golang:1.16.0
 
 WORKDIR /go/src/github.com/akimotokensaku/portfolio/go
 
@@ -8,9 +8,6 @@ ENV GO111MODULE=on
 # データベース接続のため
 ENV CGO_ENABLED=0
 
-RUN apk add git
-
-RUN go get -u github.com/cosmtrek/air && \
-  go build -o /go/bin/air github.com/cosmtrek/air
+RUN go install github.com/cosmtrek/air@latest
 
 CMD ["air", "-c", ".air.toml"]
