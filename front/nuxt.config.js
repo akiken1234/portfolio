@@ -42,9 +42,20 @@ export default {
   modules: [
     "@nuxtjs/axios",
   ],
-
   axios: {
-    proxy: true,
+    baseURL: 'http://host.docker.internal:8080/', // Used as fallback if no runtime config is provided
+  },
+
+  publicRuntimeConfig: {
+    axios: {
+      browserBaseURL: process.env.BROWSER_BASE_URL
+    }
+  },
+
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: process.env.BASE_URL
+    }
   },
 
   mode: "universal",

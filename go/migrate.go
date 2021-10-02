@@ -1,8 +1,8 @@
 package main
 
 import (
-	"local.packages/db"
-	"local.packages/model"
+	"github.com/akimotokensaku/portfolio/go/db"
+	"github.com/akimotokensaku/portfolio/go/model"
 )
 
 func main() {

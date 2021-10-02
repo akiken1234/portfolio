@@ -6,9 +6,9 @@ import (
 
 type Paper struct {
 	gorm.Model
-	Title    string `validate:"required,unique,max=50"`
-	Abstract string `validate:"required,unique,max=255"`
-	FileName string `validate:"required,unique,max=255"`
-	UserId   int
+	Title    string `json:"title" binding:"required,max=50"`
+	Abstract string `json:"abstract" binding:"required,max=255"`
+	FileName string `json:"file_name" binding:"required,max=255"`
+	UserId   int    `json:"user_id"`
 	Comment  []Comment
 }

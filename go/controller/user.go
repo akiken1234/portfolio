@@ -1,9 +1,8 @@
 package controller
 
 import (
-	"local.packages/db"
-	"local.packages/model"
-
+	"github.com/akimotokensaku/portfolio/go/db"
+	"github.com/akimotokensaku/portfolio/go/model"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

@@ -6,9 +6,9 @@ import (
 
 type Message struct {
 	gorm.Model
-	Name       string `validate:"required,unique,max=50"`
-	Title      string `validate:"required,unique,max=50"`
-	Body       string `validate:"required,unique,max=255"`
-	FromUserId int    `validate:"required"`
-	ToUserId   int    `validate:"required"`
+	Name       string `json:"name" binding:"required,max=50"`
+	Title      string `json:"title" binding:"required,max=50"`
+	Body       string `json:"body" binding:"required,max=255"`
+	FromUserId int    `json:"from_user_id" binding:"required,max=50"`
+	ToUserId   int    `json:"to_user_id" binding:"required,max=50"`
 }

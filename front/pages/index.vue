@@ -9,7 +9,7 @@
         <v-card-title class="headline">
           Welcome to the Vuetify + Nuxt.js template
         </v-card-title>
-        <!-- <div>
+        <div>
           <ul>
             <li v-for="(post, index) in posts" :key="index">
               <a :href="'post.url'" target="_blank" rel="noopener noreferrer">{{
@@ -17,7 +17,7 @@
               }}</a>
             </li>
           </ul>
-        </div> -->
+        </div>
         <v-card-actions>
           <v-spacer />
           <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
@@ -28,97 +28,11 @@
 </template>
 
 <script>
-
 export default {
-  async asyncData({ $axios }) {
-    // 取得先のURL
-    // const url = 'https://qiita.com/api/v2/items'
-    const url = 'http://host.docker.internal:8080/papers'
-    // リクエスト（Get）
-    const response = await $axios.$get(url)
-    console.log(response)
-
-    // 配列で返ってくるのでJSONにして返却
-    return {
-      posts: response,
-    }
+  async asyncData(context) {
+    const posts = await context.$axios.$get('/papers')
+    console.log(posts)
+    return { posts }
   },
 }
-// async asyncData({ $axios }) {
-//   try {
-//     // const data = await $axios.get('http://localhost:8080/users')
-//           const data = await $axios.get('https://qiita.com/api/v2/items')
-
-//     return {json: data}
-//   } catch (err) {
-//     console.error(err)
-//   }
-//   console.log(data)
-// },
-
-// async asyncData({ $axios }) {
-// 	// 取得先のURL
-// 	const url = "/users";
-// 	// リクエスト（Get）
-// 	const response = await $axios.$get(url);
-//   console.log(response)
-// 	// 配列で返ってくるのでJSONにして返却
-// 	// return {
-// 	// 	posts: response
-// 	// };
-// }
 </script>
-
-        <!-- <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text> -->
-

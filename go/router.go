@@ -1,9 +1,8 @@
 package main
 
 import (
-	"local.packages/controller"
-	"local.packages/db"
-
+	"github.com/akimotokensaku/portfolio/go/controller"
+	"github.com/akimotokensaku/portfolio/go/db"
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )

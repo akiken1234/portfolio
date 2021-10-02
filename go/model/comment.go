@@ -6,7 +6,7 @@ import (
 
 type Comment struct {
 	gorm.Model
-	Name    string `validate:"required,unique,max=50"`
-	Body    string `validate:"required,unique,max=255"`
-	PaperId int
+	Name    string `json:"name" binding:"required,max=50"`
+	Body    string `json:"body" binding:"required,max=255"`
+	PaperId int    `json:"paper_id"`
 }
