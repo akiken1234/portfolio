@@ -1,8 +1,8 @@
 package main
 
 import (
-	"local.packages/db"
-	"local.packages/model"
+	"github.com/akimotokensaku/portfolio/go/db"
+	"github.com/akimotokensaku/portfolio/go/model"
 )
 
 func main() {
@@ -13,6 +13,4 @@ func main() {
 	db.DB().AutoMigrate(&model.Paper{})
 	db.DB().AutoMigrate(&model.Message{})
 	db.DB().AutoMigrate(&model.Comment{})
-}	
-
-		
+}
