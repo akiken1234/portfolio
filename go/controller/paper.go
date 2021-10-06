@@ -17,7 +17,7 @@ func (t *Paper) List(c *gin.Context) {
 	db := db.DB()
 
 	var papers []model.Paper
-	err := db.Find(&papers).Error
+	err := db.Preload("User").Find(&papers).Error
 	if err != nil {
 		c.String(http.StatusInternalServerError, "Server Error")
 	} else {

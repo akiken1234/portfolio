@@ -1,38 +1,57 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-        <VuetifyLogo />
-      </v-card>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <div>
-          <ul>
-            <li v-for="(post, index) in posts" :key="index">
-              <a :href="'post.url'" target="_blank" rel="noopener noreferrer">{{
-                post.title
-              }}</a>
-            </li>
-          </ul>
-        </div>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+  <v-layout
+    column
+    justify-center
+  >
+    <v-card v-if="papers">
+      <v-card-title>
+        論文一覧
+        <v-spacer />
+        <v-text-field
+          v-model="searchText"
+          append-icon="mdi-magnify"
+          label="検索"
+          sigle-line
+        />
+      </v-card-title>
+      <v-data-table
+        :headers="headers"
+        :items="papers"
+        :items-per-page="5"
+        :search="searchText"
+        sort-by="id"
+        :sort-desc="true"
+        class="elevation-1"
+      >
+      </v-data-table>
+    </v-card>
+  </v-layout>
 </template>
 
 <script>
 export default {
-  async asyncData(context) {
-    const posts = await context.$axios.$get('/papers')
-    console.log(posts)
-    return { posts }
+  layout: 'index',
+  async fetch ({ store }) {
+    const papers = await store.dispatch('papers/fetchList')
+    store.commit('papers/setList', papers)
   },
+  data () {
+    return {
+      searchText: '',
+    }
+  },
+  computed: {
+    papers () {
+      return this.$store.getters['papers/list']
+    },
+    headers () {
+     return [
+        { text: 'タイトル', value: 'title' },
+        { text: '著者名', value: 'User.name' },
+        { text: '', value: 'edit-action' },
+        { text: '', value: 'delete-action' },
+      ]
+    }
+  }
 }
 </script>
