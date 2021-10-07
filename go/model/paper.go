@@ -10,5 +10,6 @@ type Paper struct {
 	Abstract string `json:"abstract" binding:"required,max=255"`
 	FileName string `json:"file_name" binding:"required,max=255"`
 	UserId   int    `json:"user_id"`
+	User User
 	Comment  []Comment
 }
