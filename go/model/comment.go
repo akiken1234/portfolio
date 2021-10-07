@@ -9,5 +9,5 @@ type Comment struct {
 	Name    string `json:"name" binding:"required,max=50"`
 	Body    string `json:"body" binding:"required,max=255"`
 	PaperId int    `json:"paper_id"`
-	Paper Paper
+	Paper   Paper
 }
