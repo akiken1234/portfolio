@@ -1,8 +1,8 @@
 <template>
   <v-layout column justify-center>
-    <v-card v-if="papers">
+    <v-card v-if="users">
       <v-card-title>
-        論文一覧
+        ユーザー一覧
         <v-spacer />
         <v-text-field
           v-model="searchText"
@@ -13,7 +13,7 @@
       </v-card-title>
       <v-data-table
         :headers="headers"
-        :items="papers"
+        :items="users"
         :items-per-page="5"
         :search="searchText"
         sort-by="id"
@@ -28,8 +28,8 @@
 <script>
 export default {
   async fetch({ store }) {
-    const papers = await store.dispatch('papers/fetchList')
-    store.commit('papers/setList', papers)
+    const users = await store.dispatch('users/fetchList')
+    store.commit('users/setList', users)
   },
   data() {
     return {
@@ -37,13 +37,15 @@ export default {
     }
   },
   computed: {
-    papers() {
-      return this.$store.getters['papers/list']
+    users() {
+      return this.$store.getters['users/list']
     },
     headers() {
       return [
-        { text: 'タイトル', value: 'title' },
-        { text: '著者名', value: 'User.name' },
+        { text: 'ID', value: 'ID' },
+        { text: '名前', value: 'name' },
+        { text: 'メールアドレス', value: 'email' },
+        { text: 'パスワード', value: 'password' },
         { text: '', value: 'edit-action' },
         { text: '', value: 'delete-action' },
       ]

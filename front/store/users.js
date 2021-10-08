@@ -1,22 +1,22 @@
 export const state = () => ({
-  papers: []
+  users: []
 })
 
 export const getters = {
   list(state) {
-    return state.papers
+    return state.users
   }
 }
 
 export const mutations = {
   setList(state, data) {
-    state.papers = data
+    state.users = data
   }
 }
 
 export const actions = {
   async fetchList() {
-    return await this.$axios.$get('/papers')
+    return await this.$axios.$get('/users')
       .catch(err => {
         console.log(err)
       })
