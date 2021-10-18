@@ -3,8 +3,10 @@ package main
 import (
 	"github.com/akimotokensaku/portfolio/go/controller"
 	"github.com/akimotokensaku/portfolio/go/db"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"time"
 )
 
 func main() {
@@ -12,11 +14,31 @@ func main() {
 	defer db.DB().Close()
 
 	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "hoge",
-		})
-	})
+	r.Use(cors.New(cors.Config{
+		// 許可したいHTTPメソッドの一覧
+		AllowMethods: []string{
+			"POST",
+			"GET",
+			"OPTIONS",
+			"PUT",
+			"DELETE",
+		},
+		// 許可したいHTTPリクエストヘッダの一覧
+		AllowHeaders: []string{
+			"Access-Control-Allow-Headers",
+			"Content-Type",
+			"Content-Length",
+			"Accept-Encoding",
+			"X-CSRF-Token",
+			"Authorization",
+		},
+		// 許可したいアクセス元の一覧
+		AllowOrigins: []string{
+			"http://localhost:3000",
+			"http://host.docker.internal:3000",
+		},
+		MaxAge: 24 * time.Hour,
+	}))
 
 	u := r.Group("/users")
 	{

@@ -28,7 +28,7 @@
     <!-- ヘッダー部分 -->
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title v-text="title" />巨人を肩の上に乗せる
       <v-spacer />
     </v-app-bar>
     <!-- コンテンツ部分 -->
@@ -64,7 +64,7 @@ export default {
         },
       ],
       miniVariant: false,
-      title: '在野研究投稿サイト',
+      title: 'Zaiya Scholar 　',
     }
   },
 }

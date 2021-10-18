@@ -14,7 +14,7 @@
       <v-data-table
         :headers="headers"
         :items="users"
-        :items-per-page="5"
+        :items-per-page="10"
         :search="searchText"
         sort-by="id"
         :sort-desc="true"
@@ -45,7 +45,6 @@ export default {
         { text: 'ID', value: 'ID' },
         { text: '名前', value: 'name' },
         { text: 'メールアドレス', value: 'email' },
-        { text: 'パスワード', value: 'password' },
         { text: '', value: 'edit-action' },
         { text: '', value: 'delete-action' },
       ]
