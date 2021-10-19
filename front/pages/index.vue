@@ -1,5 +1,5 @@
 <template>
-  <v-layout column justify-center>
+  <v-layout column justify-center align-center>
     <v-card v-if="papers">
       <v-card-title>
         論文一覧
@@ -14,12 +14,15 @@
       <v-data-table
         :headers="headers"
         :items="papers"
-        :items-per-page="5"
+        :items-per-page="10"
         :search="searchText"
-        sort-by="id"
+        sort-by="CreatedAt"
         :sort-desc="true"
         class="elevation-1"
       >
+        <template v-slot:[`item.downLoad-action`]="{ item }">
+          <v-icon @click="onClickDownLoadIcon(item)">mdi-download</v-icon>
+        </template>
       </v-data-table>
     </v-card>
   </v-layout>
@@ -34,20 +37,34 @@ export default {
   data() {
     return {
       searchText: '',
+      headers: [
+        { text: 'タイトル', value: 'title' },
+        { text: '著者', value: 'User.name' },
+        { text: '概要', value: 'abstract' },
+        { text: '投稿日', value: 'CreatedAt' },
+        { text: 'PDF', value: 'downLoad-action' },
+      ],
     }
   },
   computed: {
     papers() {
       return this.$store.getters['papers/list']
     },
-    headers() {
-      return [
-        { text: 'タイトル', value: 'title' },
-        { text: '著者名', value: 'User.name' },
-        { text: '', value: 'edit-action' },
-        { text: '', value: 'delete-action' },
-      ]
+  },
+  methods: {
+    onClickDownLoadIcon(item) {
+      const alink = document.createElement('a')
+      alink.download = item.file_name + '.pdf' // [download] のファイル名
+      alink.href = item.file_name + '.pdf' // サーバのファイルのURL
+      alink.click() // クリック実行
     },
   },
 }
 </script>
+
+<style>
+.text-start {
+  min-width: 80px;
+  max-width: 1500px;
+}
+</style>
