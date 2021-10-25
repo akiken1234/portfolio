@@ -6,12 +6,15 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"log"
 	"time"
 )
 
 func main() {
 	db.Connection()
 	defer db.DB().Close()
+
+	log.Println("aaa")
 
 	r := gin.Default()
 	r.Use(cors.New(cors.Config{
@@ -75,6 +78,13 @@ func main() {
 		m.GET("/:id", ctrl.Get)
 		m.POST("", ctrl.Create)
 		m.DELETE("/:id", ctrl.Delete)
+	}
+
+	a := r.Group("/api/auth")
+	{
+		ctrl := controller.NewAuth()
+		a.POST("/login", ctrl.Login)
+		// a.GET("/user", ctrl.user)
 	}
 
 	r.Run()
