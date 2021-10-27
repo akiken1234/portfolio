@@ -30,6 +30,7 @@
 
 <script>
 export default {
+  auth: false,
   async fetch({ store }) {
     const papers = await store.dispatch('papers/fetchList')
     store.commit('papers/setList', papers)
@@ -65,6 +66,6 @@ export default {
 <style>
 .text-start {
   min-width: 80px;
-  max-width: 1500px;
+  max-width: 2000px;
 }
 </style>

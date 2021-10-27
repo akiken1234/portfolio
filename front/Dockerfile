@@ -11,5 +11,3 @@ RUN apk add python make g++
 
 COPY ../../front/package.json ./
 COPY ../../front/yarn.lock ./
-
-RUN yarn install

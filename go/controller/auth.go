@@ -25,6 +25,9 @@ type JsonRequest struct {
 
 func (t *Auth) Login(c *gin.Context) {
 	db := db.DB()
+	log.Println(123)
+	log.Println(c.Data)
+	log.Println(c.Request.Body)
 
 	var json JsonRequest
 	if err := c.BindJSON(&json); err != nil {
