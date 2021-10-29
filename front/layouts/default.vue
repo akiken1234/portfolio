@@ -28,7 +28,7 @@
     <!-- ヘッダー部分 -->
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title"/>巨人を肩の上に乗せる
+      <v-toolbar-title v-text="title" />巨人を肩の上に乗せる
       <v-spacer />
       <v-card-actions>
         <v-btn color="white darken-1" class="black--text" @click="loginUser">
@@ -68,7 +68,7 @@ export default {
           to: '/',
         },
         {
-          icon: '',
+          icon: 'mdi-account',
           title: 'プロフィール',
           to: '/profile',
         },

@@ -1,15 +1,16 @@
 package controller
 
 import (
+	"log"
+	"net/http"
+	"strconv"
+	"time"
+
 	"github.com/akimotokensaku/portfolio/go/db"
 	"github.com/akimotokensaku/portfolio/go/model"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
-	"log"
-	"net/http"
-	"strconv"
-	"time"
 )
 
 type Auth struct{}
@@ -19,33 +20,28 @@ func NewAuth() *Auth {
 }
 
 type JsonRequest struct {
-	email    string `json:"email"`
-	password string `json:"password"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }
 
 func (t *Auth) Login(c *gin.Context) {
 	db := db.DB()
-	log.Println(123)
-	log.Println(c.Data)
+	log.Println(999)
+	log.Println(c.Request)
 	log.Println(c.Request.Body)
+	log.Println(c.PostForm("email"))
+	log.Println(c.PostForm("password"))
 
 	var json JsonRequest
 	if err := c.BindJSON(&json); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+
 	log.Println(json)
-	log.Println(json.email)
-	log.Println(json.password)
-	log.Println(c)
-	log.Println(c.Param("req"))
-	log.Println(c.Request)
-	log.Println(c.Request.Context())
-	log.Println(c.Request.Body)
 
 	var user model.User
 	err := db.First(&user, `email = ?`, "akimoto@gmail.com").Error
-
 	if err != nil {
 		c.String(http.StatusInternalServerError, "user not found")
 		return
@@ -53,11 +49,11 @@ func (t *Auth) Login(c *gin.Context) {
 	// DBから取得したユーザーパスワード(Hash)
 	dbPassword := user.Password
 	// フォームから取得したユーザーパスワード
-	formPassword := "password4last"
-	// formPassword := c.PostForm("password")
+	formPassword := "password1"
+
 	log.Println(dbPassword)
 	log.Println(formPassword)
-	log.Println(c.Request.Body)
+
 	// ユーザーパスワードの比較
 	err = bcrypt.CompareHashAndPassword([]byte(dbPassword), []byte(formPassword))
 	if err != nil {

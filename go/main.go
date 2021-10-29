@@ -57,6 +57,7 @@ func router() {
 		p.GET("", ctrl.List)
 		p.GET("/:id", ctrl.Get)
 		p.POST("", ctrl.Create)
+		p.POST("/download", ctrl.Download)
 		p.DELETE("/:id", ctrl.Delete)
 	}
 
@@ -78,7 +79,7 @@ func router() {
 		m.DELETE("/:id", ctrl.Delete)
 	}
 
-	a := r.Group("/api/auth")
+	a := r.Group("/api/auth/")
 	{
 		ctrl := controller.NewAuth()
 		a.POST("/login", ctrl.Login)
@@ -102,6 +103,7 @@ func migrate() {
 // シーダー
 func seed() {
 	db := db.Connection()
+	// userのseed
 	users1 := model.User{Name: "akimoto", Email: "akimoto@gmail.com", Password: "password1", AdminRole: true}
 
 	if err := db.Create(&users1).Error; err != nil {
@@ -121,19 +123,19 @@ func seed() {
 	}
 
 	// paperのseed
-	papers1 := model.Paper{Title: "アリストテレスについて", Abstract: "概要１", UserId: 1}
+	papers1 := model.Paper{Title: "アリストテレスについて", Abstract: "概要１", FileName: "file_name_1.pdf", UserId: 1}
 
 	if err := db.Create(&papers1).Error; err != nil {
 		fmt.Printf("%+v", err)
 	}
 
-	papers2 := model.Paper{Title: "カントについて", Abstract: "概要２", UserId: 2}
+	papers2 := model.Paper{Title: "カントについて", Abstract: "概要２", FileName: "file_name_2.pdf", UserId: 2}
 
 	if err := db.Create(&papers2).Error; err != nil {
 		fmt.Printf("%+v", err)
 	}
 
-	papers3 := model.Paper{Title: "ニーチェについて", Abstract: "概要3", UserId: 3}
+	papers3 := model.Paper{Title: "ニーチェについて", Abstract: "概要3", FileName: "file_name_3.pdf", UserId: 3}
 
 	if err := db.Create(&papers3).Error; err != nil {
 		fmt.Printf("%+v", err)

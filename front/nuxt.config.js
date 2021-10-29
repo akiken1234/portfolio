@@ -40,11 +40,11 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    "@nuxtjs/axios",
+    '@nuxtjs/axios',
     '@nuxtjs/auth'
   ],
   axios: {
-    baseURL: 'http://host.docker.internal:8080/', // Used as fallback if no runtime config is provided
+    baseURL: 'http://host.docker.internal:8080', // Used as fallback if no runtime config is provided
   },
 
   auth: {
