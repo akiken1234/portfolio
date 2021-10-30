@@ -9,7 +9,6 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
 	"fmt"
-	"time"
 )
 
 // ルーティング
@@ -26,6 +25,8 @@ func router() {
 		},
 		// 許可したいHTTPリクエストヘッダの一覧
 		AllowHeaders: []string{
+			// "Access-Control-Allow-Headers", "*",
+			"Access-Control-Allow-Origin", // 追加
 			"Access-Control-Allow-Headers",
 			"Content-Type",
 			"Content-Length",
@@ -38,7 +39,6 @@ func router() {
 			"http://localhost:3000",
 			"http://host.docker.internal:3000",
 		},
-		MaxAge: 24 * time.Hour,
 	}))
 
 	u := r.Group("/users")
@@ -55,9 +55,8 @@ func router() {
 	{
 		ctrl := controller.NewPaper()
 		p.GET("", ctrl.List)
-		p.GET("/:id", ctrl.Get)
+		p.POST("/get", ctrl.Get)
 		p.POST("", ctrl.Create)
-		p.POST("/download", ctrl.Download)
 		p.DELETE("/:id", ctrl.Delete)
 	}
 
