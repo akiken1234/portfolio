@@ -7,6 +7,7 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"golang.org/x/crypto/bcrypt"
 
 	"fmt"
 )
@@ -82,7 +83,7 @@ func router() {
 	{
 		ctrl := controller.NewAuth()
 		a.POST("/login", ctrl.Login)
-		// a.GET("/user", ctrl.user)
+		a.GET("/user", ctrl.User)
 	}
 
 	r.Run()
@@ -102,33 +103,29 @@ func migrate() {
 // シーダー
 func seed() {
 	db := db.Connection()
+
 	// userのseed
-	users1 := model.User{Name: "akimoto", Email: "akimoto@gmail.com", Password: "password1", AdminRole: true}
+	count := 3
+	for i := 1; i <= count; i++ {
+		name := fmt.Sprintf("name%d", i)
+		email := fmt.Sprintf("email%d@gmail.com", i)
+		password := fmt.Sprintf("password%d", i)
+		hash_password, _ := bcrypt.GenerateFromPassword([]byte(password), 12)
 
-	if err := db.Create(&users1).Error; err != nil {
-		fmt.Printf("%+v", err)
-	}
-
-	users2 := model.User{Name: "suzuki", Email: "suzuki@gmail.com", Password: "password2"}
-
-	if err := db.Create(&users2).Error; err != nil {
-		fmt.Printf("%+v", err)
-	}
-
-	users3 := model.User{Name: "satou", Email: "satou@gmail.com", Password: "password3"}
-
-	if err := db.Create(&users3).Error; err != nil {
-		fmt.Printf("%+v", err)
+		user := model.User{Name: name, Email: email, Password: hash_password}
+		if err := db.Create(&user).Error; err != nil {
+			fmt.Printf("%+v", err)
+		}
 	}
 
 	// paperのseed
-	papers1 := model.Paper{Title: "アリストテレスについて", Abstract: "概要１", FileName: "file_name_1.pdf", UserId: 1}
+	papers1 := model.Paper{Title: "アリストテレスについて", Abstract: "概要1", FileName: "file_name_1.pdf", UserId: 1}
 
 	if err := db.Create(&papers1).Error; err != nil {
 		fmt.Printf("%+v", err)
 	}
 
-	papers2 := model.Paper{Title: "カントについて", Abstract: "概要２", FileName: "file_name_2.pdf", UserId: 2}
+	papers2 := model.Paper{Title: "カントについて", Abstract: "概要2", FileName: "file_name_2.pdf", UserId: 2}
 
 	if err := db.Create(&papers2).Error; err != nil {
 		fmt.Printf("%+v", err)

@@ -21,12 +21,8 @@
           </v-col>
         </v-row>
         <v-row justify="center">
-          <v-col cols="12" md="10" sm="10">
-            <v-btn
-              block
-              class="mr-4 blue white--text"
-              @click="loginWithAuthModule"
-            >
+          <v-col cols="12" md="5" sm="5">
+            <v-btn block class="mr-4 blue white--text" @click="login">
               ログイン
             </v-btn>
           </v-col>
@@ -38,15 +34,16 @@
 
 <script>
 export default {
+  auth: false,
   data() {
     return {
-      password: '',
       email: '',
+      password: '',
     }
   },
   methods: {
-    async loginWithAuthModule() {
-      await this.$auth
+    login() {
+      this.$auth
         .loginWith('local', {
           data: {
             email: this.email,
@@ -55,7 +52,8 @@ export default {
         })
         .then(
           (response) => {
-            console.log(response)
+            this.$router.push('/')
+            alert('ログインしました！')
             return response
           },
           (error) => {

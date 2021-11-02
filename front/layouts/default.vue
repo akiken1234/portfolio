@@ -28,18 +28,31 @@
     <!-- ヘッダー部分 -->
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />巨人を肩の上に乗せる
+      <v-toolbar-title v-text="title" />
+      <div v-text="sub_title" class="mx-3 mt-1" />
       <v-spacer />
-      <v-card-actions>
-        <v-btn color="white darken-1" class="black--text" @click="loginUser">
-          ログイン
-        </v-btn>
-      </v-card-actions>
-      <v-card-actions>
-        <v-btn color="white darken-1" class="black--text" @click="registerUser">
-          新規登録
-        </v-btn>
-      </v-card-actions>
+      <div v-if="this.$auth.loggedIn">
+        <v-card-actions>
+          <v-text class="mx-2">{{ this.$auth.user.name }}さん</v-text>
+          <v-btn color="white darken-1" class="black--text" @click="logoutUser">
+            ログアウト
+          </v-btn>
+        </v-card-actions>
+      </div>
+      <div v-else>
+        <v-card-actions>
+          <v-btn color="white darken-1" class="black--text" @click="loginUser">
+            ログイン
+          </v-btn>
+          <v-btn
+            color="white darken-1"
+            class="black--text"
+            @click="registerUser"
+          >
+            新規登録
+          </v-btn>
+        </v-card-actions>
+      </div>
     </v-app-bar>
     <!-- コンテンツ部分 -->
     <v-content>
@@ -61,30 +74,26 @@ export default {
       clipped: false,
       drawer: true,
       fixed: false,
+      miniVariant: false,
       items: [
         {
-          icon: 'mdi-apps',
+          icon: 'mdi-home',
           title: 'HOME',
           to: '/',
         },
         {
-          icon: 'mdi-account',
-          title: 'プロフィール',
-          to: '/profile',
-        },
-        {
-          icon: '',
+          icon: 'mdi-upload',
           title: '論文投稿',
           to: '/upload',
         },
-        {
-          icon: 'mdi-account',
-          title: 'ユーザー一覧',
-          to: '/users',
-        },
+        // {
+        //   icon: 'mdi-account',
+        //   title: 'ユーザー一覧',
+        //   to: '/users',
+        // },
       ],
-      miniVariant: false,
-      title: 'Zaiya Scholar　',
+      title: 'Zaiya Scholar',
+      sub_title: '巨人を肩の上に乗せる',
     }
   },
   methods: {
@@ -93,6 +102,10 @@ export default {
     },
     registerUser() {
       this.$router.push('/register')
+    },
+    logoutUser() {
+      this.$auth.logout()
+      alert('ログアウトしました！')
     },
   },
 }

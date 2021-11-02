@@ -28,7 +28,7 @@
             </v-col>
           </v-row>
           <v-row justify="center">
-            <v-col cols="12" md="10" sm="10">
+            <v-col cols="12" md="5" sm="5">
               <v-btn block class="mr-4 blue white--text" @click="upload_file">
                 アップロード
               </v-btn>
@@ -41,9 +41,7 @@
 </template>
 
 <script>
-import FormData from 'form-data'
 export default {
-  auth: false,
   data() {
     return {
       title: '',
@@ -58,6 +56,7 @@ export default {
       params.append('abstract', this.abstract)
       params.append('file_name', this.file.name)
       params.append('file', this.file)
+      params.append('user_id', this.$auth.user.ID)
       this.$axios
         .$post('/papers', params)
         .then((res) => {

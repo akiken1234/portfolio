@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/akimotokensaku/portfolio/go/db"
 	"github.com/akimotokensaku/portfolio/go/model"
@@ -20,7 +21,6 @@ func NewPaper() *Paper {
 
 func (t *Paper) List(c *gin.Context) {
 	db := db.DB()
-	log.Println(c.Param("list"))
 
 	var papers []model.Paper
 	err := db.Preload("User").Find(&papers).Error
@@ -47,8 +47,13 @@ func (t *Paper) Create(c *gin.Context) {
 	title := c.Request.FormValue("title")
 	abstract := c.Request.FormValue("abstract")
 	file_name := c.Request.FormValue("file_name")
-	paper := model.Paper{Title: title, Abstract: abstract, FileName: file_name}
-	err := db.Create(&paper).Error
+	user_id, err := strconv.Atoi(c.Request.FormValue("user_id"))
+	log.Println(user_id)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Server Error")
+	}
+	paper := model.Paper{Title: title, Abstract: abstract, FileName: file_name, UserId: user_id}
+	err = db.Create(&paper).Error
 	if err != nil {
 		c.String(http.StatusInternalServerError, "Server Error")
 	}

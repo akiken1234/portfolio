@@ -1,10 +1,13 @@
 package controller
 
 import (
+	"log"
+	"net/http"
+
 	"github.com/akimotokensaku/portfolio/go/db"
 	"github.com/akimotokensaku/portfolio/go/model"
 	"github.com/gin-gonic/gin"
-	"net/http"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct{}
@@ -39,14 +42,15 @@ func (t *User) Get(c *gin.Context) {
 
 func (t *User) Create(c *gin.Context) {
 	db := db.DB()
+	log.Println(333)
+	name := c.Request.FormValue("name")
+	email := c.Request.FormValue("email")
+	password := c.Request.FormValue("password")
+	hash_password, _ := bcrypt.GenerateFromPassword([]byte(password), 12)
 
-	var user model.User
-	err := c.BindJSON(&user)
-	if err != nil {
-		c.String(http.StatusBadRequest, "Bad request")
-		return
-	}
-	err = db.Create(&user).Error
+	user := model.User{Name: name, Email: email, Password: hash_password}
+
+	err := db.Create(&user).Error
 	if err != nil {
 		c.String(http.StatusInternalServerError, "Server Error")
 	}

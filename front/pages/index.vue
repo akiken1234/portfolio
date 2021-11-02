@@ -2,7 +2,6 @@
   <v-layout column justify-center align-center>
     <v-card v-if="papers">
       <v-card-title>
-        論文一覧
         <v-spacer />
         <v-text-field
           v-model="searchText"
@@ -10,11 +9,12 @@
           label="検索"
           sigle-line
         />
+        <v-spacer />
       </v-card-title>
       <v-data-table
         :headers="headers"
         :items="papers"
-        :items-per-page="10"
+        :items-per-page="5"
         :search="searchText"
         sort-by="CreatedAt"
         :sort-desc="true"
@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     onClickDownLoadIcon(item) {
-      const params = new FormData()
+      const params = new URLSearchParams()
       params.append('file_name', item.file_name)
       this.$axios
         .$post('/papers/get', params, { responseType: 'blob' })
