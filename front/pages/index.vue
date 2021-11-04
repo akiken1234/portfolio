@@ -30,6 +30,7 @@
 
 <script>
 export default {
+  auth: false,
   async fetch({ store }) {
     const papers = await store.dispatch('papers/fetchList')
     store.commit('papers/setList', papers)
@@ -53,10 +54,19 @@ export default {
   },
   methods: {
     onClickDownLoadIcon(item) {
-      const alink = document.createElement('a')
-      alink.download = item.file_name + '.pdf' // [download] のファイル名
-      alink.href = item.file_name + '.pdf' // サーバのファイルのURL
-      alink.click() // クリック実行
+      const params = new FormData()
+      params.append('file_name', item.file_name)
+      this.$axios
+        .$post('/papers/get', params, { responseType: 'blob' })
+        .then((res) => {
+          const alink = document.createElement('a')
+          alink.download = item.file_name // [download] のファイル名
+          alink.href = URL.createObjectURL(res) // ファイルのURL
+          alink.click() // クリック実行
+        })
+        .catch((e) => {
+          console.log(e)
+        })
     },
   },
 }
@@ -65,6 +75,6 @@ export default {
 <style>
 .text-start {
   min-width: 80px;
-  max-width: 1500px;
+  max-width: 2000px;
 }
 </style>

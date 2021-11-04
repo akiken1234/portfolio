@@ -37,13 +37,35 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
   ],
-  
+
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    "@nuxtjs/axios",
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
   axios: {
-    baseURL: 'http://host.docker.internal:8080/', // Used as fallback if no runtime config is provided
+    baseURL: 'http://host.docker.internal:8080', // Used as fallback if no runtime config is provided
+  },
+
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      callback: false,
+      home: '/'
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/api/auth/login', method: 'post', propertyName: 'token' },
+          logout: { url: '/api/auth/logout', method: 'post' },
+          user: { url: '/api/auth/user', method: 'get', propertyName: 'user' }
+        }
+      }
+    }
+  },
+  router: {
+    middleware: ['auth']
   },
 
   publicRuntimeConfig: {

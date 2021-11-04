@@ -27,6 +27,7 @@
 
 <script>
 export default {
+  auth: false,
   async fetch({ store }) {
     const users = await store.dispatch('users/fetchList')
     store.commit('users/setList', users)

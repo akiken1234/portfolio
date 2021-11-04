@@ -30,6 +30,16 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />巨人を肩の上に乗せる
       <v-spacer />
+      <v-card-actions>
+        <v-btn color="white darken-1" class="black--text" @click="loginUser">
+          ログイン
+        </v-btn>
+      </v-card-actions>
+      <v-card-actions>
+        <v-btn color="white darken-1" class="black--text" @click="registerUser">
+          新規登録
+        </v-btn>
+      </v-card-actions>
     </v-app-bar>
     <!-- コンテンツ部分 -->
     <v-content>
@@ -54,8 +64,18 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: '論文一覧',
+          title: 'HOME',
           to: '/',
+        },
+        {
+          icon: 'mdi-account',
+          title: 'プロフィール',
+          to: '/profile',
+        },
+        {
+          icon: '',
+          title: '論文投稿',
+          to: '/upload',
         },
         {
           icon: 'mdi-account',
@@ -64,8 +84,16 @@ export default {
         },
       ],
       miniVariant: false,
-      title: 'Zaiya Scholar 　',
+      title: 'Zaiya Scholar　',
     }
+  },
+  methods: {
+    loginUser() {
+      this.$router.push('/login')
+    },
+    registerUser() {
+      this.$router.push('/register')
+    },
   },
 }
 </script>
