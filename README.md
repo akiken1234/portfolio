@@ -24,7 +24,7 @@
 （面接官が実行する可能性があるので確実に動く手順をわかりやすく書いてください）
 ```
 ① portfolio配下で docker　compose up -d を実行。
-②　　portfolio配下で docker　compose exec front sh を実行し、npm install -g npm@8.1.3　を実行。
+②　　portfolio配下で docker　compose exec front sh を実行し、npm install　を実行。
 ③ portfolio配下で docker　compose exec go sh を実行し、go run main.go　を実行。
 ④ http://localhost:3000 にアクセス
 ```
