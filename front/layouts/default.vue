@@ -33,7 +33,7 @@
       <v-spacer />
       <div v-if="this.$auth.loggedIn">
         <v-card-actions>
-          <v-text class="mx-2">{{ this.$auth.user.name }}さん</v-text>
+          <span class="mx-2">{{ this.$auth.user.name }}さん</span>
           <v-btn color="white darken-1" class="black--text" @click="logoutUser">
             ログアウト
           </v-btn>
@@ -82,15 +82,15 @@ export default {
           to: '/',
         },
         {
+          icon: 'mdi-account',
+          title: 'プロフィール',
+          to: '/profile',
+        },
+        {
           icon: 'mdi-upload',
           title: '論文投稿',
           to: '/upload',
         },
-        // {
-        //   icon: 'mdi-account',
-        //   title: 'ユーザー一覧',
-        //   to: '/users',
-        // },
       ],
       title: 'Zaiya Scholar',
       sub_title: '巨人を肩の上に乗せる',
@@ -105,7 +105,7 @@ export default {
     },
     logoutUser() {
       this.$auth.logout()
-      alert('ログアウトしました！')
+      alert('ログアウトしました')
     },
   },
 }

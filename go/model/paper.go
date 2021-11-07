@@ -8,21 +8,20 @@ import (
 
 type Paper struct {
 	gorm.Model
-	Title    string `json:"title" binding:"required,max=50"`
-	Abstract string `json:"abstract" binding:"required,max=255"`
-	FileName string `json:"file_name" binding:"required,max=255"`
-	UserId   int    `json:"user_id"`
+	Title    string `json:"title" validate:"required,max=50" gorm:"not null;size:50"`
+	Abstract string `json:"abstract" validate:"required,max=200" gorm:"not null;size:200"`
+	FileName string `json:"file_name" validate:"required" gorm:"not null;unique"`
+	UserId   int    `json:"user_id" validate:"required" gorm:"not null"`
 	User     User
-	Comment  []Comment
 }
 
 func (p Paper) MarshalJSON() ([]byte, error) {
 	return json.Marshal(struct {
 		ID        uint
-		Title     string `json:"title"`
-		Abstract  string `json:"abstract" binding:"required,max=255"`
-		FileName  string `json:"file_name" binding:"required,max=255"`
-		UserId    int    `json:"user_id"`
+		Title     string `json:"title" validate:"required,max=50" gorm:"not null;size:50"`
+		Abstract  string `json:"abstract" validate:"required,max=200" gorm:"not null;size:200"`
+		FileName  string `json:"file_name" validate:"required" gorm:"not null"`
+		UserId    int    `json:"user_id" validate:"required" gorm:"not null"`
 		User      User
 		CreatedAt string
 	}{

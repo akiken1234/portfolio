@@ -1,1 +1,1 @@
-//  '@nuxtjs/auth'に必要なため作成
+//  '@nuxtjs/auth'に必要なので作成
