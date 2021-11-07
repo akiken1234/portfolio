@@ -26,7 +26,8 @@
 ②　　portfolio配下で docker　compose exec front sh を実行し、npm install　を実行。
 ③ portfolio配下で docker　compose exec go sh を実行し、go run main.go　を実行。
 ④ http://localhost:3000 にアクセス。
-ログインする場合、あらかじめ入力されているメールアドレスとパスワードをお使いください。
+
+※ログインする場合、あらかじめ入力されているメールアドレスとパスワードをお使いください。
 ```
 
 ## テスト
