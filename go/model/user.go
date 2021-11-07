@@ -6,9 +6,9 @@ import (
 
 type User struct {
 	gorm.Model
-	Name      string `json:"name" binding:"required,max=50"`
-	Email     string `json:"email" binding:"required,email,max=255"`
-	Password  string `json:"password" binding:"required,min=8,max=16"`
-	AdminRole bool   `json:"admin_role"`
+	Name      string `json:"name" validate:"required,max=20" gorm:"not null;size:20"`
+	Email     string `json:"email" validate:"required,email" gorm:"not null;unique"`
+	Password  string `json:"password" validate:"required,min=8,max=32" gorm:"not null"`
+	AdminRole bool   `json:"admin_role" gorm:"default:0"`
 	Paper     []Paper
 }

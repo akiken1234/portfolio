@@ -1,10 +1,12 @@
 package controller
 
 import (
+	"net/http"
+
 	"github.com/akimotokensaku/portfolio/go/db"
 	"github.com/akimotokensaku/portfolio/go/model"
 	"github.com/gin-gonic/gin"
-	"net/http"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct{}
@@ -13,71 +15,56 @@ func NewUser() *User {
 	return &User{}
 }
 
+// ユーザー全件取得
 func (t *User) List(c *gin.Context) {
 	db := db.DB()
 
 	var users []model.User
-	err := db.Find(&users).Error
-	if err != nil {
+	if err := db.Find(&users).Error; err != nil {
 		c.String(http.StatusInternalServerError, "Server Error")
 	} else {
 		c.JSON(200, users)
 	}
 }
 
-func (t *User) Get(c *gin.Context) {
-	db := db.DB()
-
-	var user model.User
-	err := db.First(&user, c.Param("id")).Error
-	if err != nil {
-		c.String(http.StatusInternalServerError, "Server Error")
-	} else {
-		c.JSON(200, user)
-	}
-}
-
+// ユーザー作成
 func (t *User) Create(c *gin.Context) {
 	db := db.DB()
 
 	var user model.User
-	err := c.BindJSON(&user)
-	if err != nil {
-		c.String(http.StatusBadRequest, "Bad request")
+	if err := c.BindJSON(&user); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	err = db.Create(&user).Error
-	if err != nil {
+	// パスワードのハッシュ化
+	hash_password, _ := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	user.Password = string(hash_password)
+
+	if err := db.Create(&user).Error; err != nil {
 		c.String(http.StatusInternalServerError, "Server Error")
 	}
 }
 
+// ユーザー更新
 func (t *User) Update(c *gin.Context) {
 	db := db.DB()
 
 	var user model.User
-	err := db.First(&user, c.Param("id")).Error
-	if err != nil {
-		c.String(http.StatusInternalServerError, "user not found")
+	if err := c.BindJSON(&user); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	err = c.BindJSON(&user)
-	if err != nil {
-		c.String(http.StatusBadRequest, "Bad request")
-		return
-	}
-	err = db.Save(&user).Error
-	if err != nil {
+
+	if err := db.Model(&user).Updates(&user).Error; err != nil {
 		c.String(http.StatusInternalServerError, "Server Error")
 	}
 }
 
-func (t *User) Delete(c *gin.Context) {
-	db := db.DB()
+// func (t *User) Delete(c *gin.Context) {
+// 	db := db.DB()
 
-	var user model.User
-	err := db.Delete(&user, c.Param("id")).Error
-	if err != nil {
-		c.String(http.StatusInternalServerError, "Server Error")
-	}
-}
+// 	var user model.User
+// 	if err := db.Delete(&user, c.Param("id")).Error; err != nil {
+// 		c.String(http.StatusInternalServerError, "Server Error")
+// 	}
+// }
