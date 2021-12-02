@@ -13,14 +13,15 @@
 ## 環境
 |環境|サーバー|URL|
 |:---:|:---|:---|
-|local|ローカルPC|http://127.0.0.1:3000|
-|prod|AWS|(URL)|
+<!-- |local|ローカルPC|http://127.0.0.1:3000| -->
+|prod|AWS|https://zaiyascholar.com|
+ログインする場合は、あらかじめ入力されているメールアドレスとパスワードをお使いください。
 
 ## 言語・設計・フレームワーク
 - GoLang v1.16
 - gin
 
-## 開発環境構築手順
+<!-- ## 開発環境構築手順
 ```
 ① portfolio配下で docker　compose up -d を実行。
 ②　　portfolio配下で docker　compose exec front sh を実行し、npm install　を実行。
@@ -32,3 +33,4 @@
 
 ## テスト
 go test ./...
+ -->
