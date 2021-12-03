@@ -22,10 +22,10 @@ https://scholar-independent.com/
 
 ## 技術
 - Golang v1.16, Gin, Gorm, Go Modules
-- Node v14.4, Nuxt.js(SSR), Vuetify, Auth Module
+- Node v14.4, Nuxt.js(SSRモード), Vuetify, Auth Module
 - MySQL v8.0
 - Docker
-- AWS, ECS(Fargate), RDB, Route53, ALB, ACM
+- AWS, ECS(Fargateタイプ), RDB, Route53, ALB, ACM
 
 ## インフラ構成図
 
