@@ -1,40 +1,30 @@
 # Independent Scholar
 ## 概要
-独立研究者のための論文投稿サイトです。
+大学や研究機関に所属していない"独立研究者"のための論文投稿サイトです。
 
-
+<img width="1435" alt="スクリーンショット 2021-12-04 4 59 26" src="https://user-images.githubusercontent.com/89379855/144669484-1f75946a-71f1-4c03-a836-2c1828ed5919.png">
 
 ## URL
-https://scholar-independent.com/  （ログインする場合は、テスト用のアカウント情報があらかじめ入力されていますので、そちらをお使いください。）
+https://scholar-independent.com/  ※ログインする場合は、テスト用のアカウント情報があらかじめ入力されていますので、そちらをお使いください。
 
 ## 機能
-論文一覧機能
+–　論文一覧表示機能
+–　論文検索機能
+–　論文（PDF）ダウンロード機能
+–　論文（PDF）アップロード機能
+–　論文削除機能
+–　ユーザー登録機能
+–　ユーザーログイン/ログアウト機能
+–　ユーザープロフィール表示機能
+–　ユーザープロフィール編集機能
+–　ページネーション機能
 
+## 技術
+- Golang v1.16, gin, gorm, Go Modules
+- Node v14.4, Nuxt.js(SSR), vuetify, Auth Module
+- MySQL v8.0
+- Docker
+- AWS, ECS(Fargate), RDB, Route53, ALB, ACM
 
-## ネットワーク構成図
-（prod環境までできたら図を作って記載）
+## インフラ構成図
 
-## 環境
-|環境|サーバー|URL|
-|:---:|:---|:---|
-|local|ローカルPC|http://127.0.0.1:3000|
-|prod|AWS|https://zaiyascholar.com|
-
-## 言語・設計・フレームワーク
-- GoLang v1.16
-- gin
-- Nuxt.js
-
-<!-- ## 開発環境構築手順
-```
-① portfolio配下で docker　compose up -d を実行。
-②　　portfolio配下で docker　compose exec front sh を実行し、npm install　を実行。
-③ portfolio配下で docker　compose exec go sh を実行し、go run main.go　を実行。
-④ http://localhost:3000 にアクセス。
-
-ログインする場合は、あらかじめ入力されているメールアドレスとパスワードをお使いください。
-```
-
-## テスト
-go test ./...
- -->
