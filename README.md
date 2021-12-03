@@ -1,6 +1,4 @@
-＃portfolio
-
-# サービス名
+# Independent Scholar
 (各種バッジ)
 
 （サービスの画面画像）
