@@ -5,14 +5,14 @@
 <img width="900" alt="スクリーンショット 2021-12-04 4 59 26" src="https://user-images.githubusercontent.com/89379855/144669484-1f75946a-71f1-4c03-a836-2c1828ed5919.png">
 
 ## URL
-https://scholar-independent.com/
+https://scholar-independent.com/  
 ※　ログインする場合は、テスト用のアカウント情報があらかじめ入力されていますので、そちらをお使いください。
 
 ## 機能
 - 論文一覧表示機能
 - 論文検索機能
-- 論文（PDF）ダウンロード機能
-- 論文（PDF）アップロード機能
+- 論文(PDF)ダウンロード機能
+- 論文(PDF)アップロード機能
 - 論文削除機能
 - ユーザー登録機能
 - ユーザーログイン/ログアウト機能
@@ -28,4 +28,6 @@ https://scholar-independent.com/
 - AWS, ECS(Fargate), RDB, Route53, ALB, ACM
 
 ## インフラ構成図
+
+
 
