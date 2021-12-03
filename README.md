@@ -2,7 +2,7 @@
 ## 概要
 大学や研究機関に所属していない"独立研究者"のための論文投稿サイトです。
 
-<img width="1435" alt="スクリーンショット 2021-12-04 4 59 26" src="https://user-images.githubusercontent.com/89379855/144669484-1f75946a-71f1-4c03-a836-2c1828ed5919.png">
+<img width="1000" alt="スクリーンショット 2021-12-04 4 59 26" src="https://user-images.githubusercontent.com/89379855/144669484-1f75946a-71f1-4c03-a836-2c1828ed5919.png">
 
 ## URL
 https://scholar-independent.com/  ※ログインする場合は、テスト用のアカウント情報があらかじめ入力されていますので、そちらをお使いください。
