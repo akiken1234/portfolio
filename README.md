@@ -1,13 +1,15 @@
 # Independent Scholar
 ## 概要
 独立研究者のための論文投稿サイトです。
-<img width="1426" alt="スクリーンショット 2021-12-04 4 15 58" src="https://user-images.githubusercontent.com/89379855/144660089-2a26061d-d0e7-44e3-a9b4-d68e3d168967.png">
-## URL
-https://scholar-independent.com/
-（ログインする場合は、テスト用のアカウント情報があらかじめ入力されていますので、そちらをお使いください。）
-## 機能
 
-（サービスの概要や機能を書く）
+
+
+## URL
+https://scholar-independent.com/  （ログインする場合は、テスト用のアカウント情報があらかじめ入力されていますので、そちらをお使いください。）
+
+## 機能
+論文一覧機能
+
 
 ## ネットワーク構成図
 （prod環境までできたら図を作って記載）
