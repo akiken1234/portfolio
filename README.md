@@ -8,6 +8,7 @@
 <a href="https://scholar-independent.com/" target="_blank"></a>
 
 https://scholar-independent.com/  
+  
 ※ ログインする場合は、テスト用のアカウント情報があらかじめ入力されていますので、そちらをお使いください。
 
 ## 機能
