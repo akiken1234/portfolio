@@ -1,3 +1,8 @@
 .DS_Store
 go/tmp/air.log
 pkg
+.env
+go/.env/dev.env
+front/.env
+.vscode
+bin

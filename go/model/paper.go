@@ -25,6 +25,7 @@ func (p Paper) MarshalJSON() ([]byte, error) {
 		User      User
 		CreatedAt string
 	}{
+		ID:        p.ID,
 		Title:     p.Title,
 		Abstract:  p.Abstract,
 		FileName:  p.FileName,

@@ -3,8 +3,8 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - front',
-    title: 'front',
+    // titleTemplate: '%s - front',
+    title: 'Independent Scholar',
     htmlAttrs: {
       lang: 'en'
     },
@@ -44,7 +44,8 @@ export default {
     '@nuxtjs/auth'
   ],
   axios: {
-    baseURL: 'http://host.docker.internal:8080', // Used as fallback if no runtime config is provided
+    baseURL: process.env.NODE_ENV == "production" ? process.env.API_URL : "http://host.docker.internal:8080",
+    browserBaseURL: process.env.NODE_ENV == "production" ? process.env.API_URL_BROWSER : "http://host.docker.internal:8080"
   },
 
   auth: {
@@ -66,18 +67,6 @@ export default {
   },
   router: {
     middleware: ['auth']
-  },
-
-  publicRuntimeConfig: {
-    axios: {
-      browserBaseURL: process.env.BROWSER_BASE_URL
-    }
-  },
-
-  privateRuntimeConfig: {
-    axios: {
-      baseURL: process.env.BASE_URL
-    }
   },
 
   mode: "universal",
