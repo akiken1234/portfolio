@@ -28,4 +28,4 @@ https://scholar-independent.com/
 - AWS, ECS(Fargateタイプ), RDB, Route53, ALB, ACM
 
 ## インフラ構成図
-![インフラ構成図 (4)](https://user-images.githubusercontent.com/89379855/144760714-2b05f7cb-0fbb-470c-b622-bffe58ae4a09.jpg)
+![インフラ構成図 (5)](https://user-images.githubusercontent.com/89379855/144761029-12ec0deb-9c55-4039-99bb-ed6a2098c7e8.jpg)
