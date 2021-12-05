@@ -1,6 +1,4 @@
-.DS_Store/
-.vscode/
+.DS_Store
+.vscode
 bin/
 pkg/
-go/tmp/
-go/.env/
