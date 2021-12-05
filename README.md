@@ -25,7 +25,7 @@ https://scholar-independent.com/
 - Node v14.4.0, Nuxt.js(SSRモード), Vuetify, Auth Module
 - MySQL v8.0
 - Docker
-- AWS, ECS(Fargateタイプ), RDB, Route53, ALB, ACM
+- AWS, ECS(Fargateタイプ), RDS, Route53, ALB, ACM
 
 ## インフラ構成図
 ![インフラ構成図 (6)](https://user-images.githubusercontent.com/89379855/144764583-553964f5-b3ec-45e4-94ff-6f67c76db649.jpg)
