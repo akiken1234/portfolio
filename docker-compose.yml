@@ -10,7 +10,6 @@ services:
       - "8080:8080"  
     depends_on: 
       - db
-    # command: go run main.go
   db:
     container_name: db
     image: mysql:8.0
@@ -21,8 +20,6 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       TZ: 'Asia/Tokyo'
-    volumes:
-      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf  
     ports:   
       - "3306:3306"
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
@@ -36,4 +33,3 @@ services:
     ports:
       - 3000:3000
     stdin_open: true
-    # command: npm run dev
