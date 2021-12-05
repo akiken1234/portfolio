@@ -21,8 +21,8 @@ https://scholar-independent.com/
 - ページネーション機能
 
 ## 技術
-- Golang v1.16, Gin, Gorm, Go Modules
-- Node v14.4, Nuxt.js(SSRモード), Vuetify, Auth Module
+- Golang v1.16.0, Gin, Gorm, Go Modules
+- Node v14.4.0, Nuxt.js(SSRモード), Vuetify, Auth Module
 - MySQL v8.0
 - Docker
 - AWS, ECS(Fargateタイプ), RDB, Route53, ALB, ACM

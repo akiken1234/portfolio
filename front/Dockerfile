@@ -1,13 +1,19 @@
-FROM node:16-alpine3.11
+FROM --platform=linux/x86_64 node:14.4.0-alpine
 
-ENV LANG ja_JP.UTF-8
-ENV TZ Asia/Tokyo
+RUN mkdir /app
 
-RUN mkdir /front
+WORKDIR /app
 
-WORKDIR /front
+ADD . /app
 
-RUN apk add python make g++
+RUN apk update && apk add python make g++ gcc
 
-COPY ../../front/package.json ./
-COPY ../../front/yarn.lock ./
+RUN npm install
+
+RUN npm run build
+
+ENV HOST 0.0.0.0
+
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]

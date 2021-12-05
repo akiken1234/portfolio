@@ -6,10 +6,6 @@ services:
       context: ./
       dockerfile: go/Dockerfile
     tty: true
-    environment:
-      TZ: Asia/Tokyo 
-    volumes:
-      - ./go/:/go/src/github.com/akimotokensaku/portfolio/go
     ports:
       - "8080:8080"  
     depends_on: 
@@ -20,13 +16,13 @@ services:
     image: mysql:8.0
     platform: linux/x86_64
     environment:
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-      MYSQL_DATABASE: $MYSQL_DATABASE
-      MYSQL_USER: $MYSQL_USER
-      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: portfolio_user
+      MYSQL_PASSWORD: portfolio_password
       TZ: 'Asia/Tokyo'
     volumes:
-      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf  
     ports:   
       - "3306:3306"
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
@@ -36,11 +32,8 @@ services:
     build:
       context: ./
       dockerfile: front/Dockerfile
+    tty: true
     ports:
       - 3000:3000
-    volumes:
-      - ./front:/front:cached
-      - ./front/node_modules:/front/node_modules
-    tty: true
     stdin_open: true
-    command: yarn dev
+    command: npm run dev

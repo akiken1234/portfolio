@@ -92,8 +92,8 @@ export default {
           to: '/upload',
         },
       ],
-      title: 'Zaiya Scholar',
-      sub_title: '巨人を肩の上に乗せる',
+      title: 'Independent Scholar',
+      sub_title: '',
     }
   },
   methods: {

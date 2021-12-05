@@ -19,11 +19,15 @@ import (
 
 func router() {
 	r := gin.Default()
-	// envファイルからパスを取得
+
+	frontHost := "http://localhost:3000"
+	// 本番環境の場合、envファイルからパスを取得
 	if err := godotenv.Load(".env/dev.env"); err != nil {
 		panic("Error loading .env file")
 	}
-	host := os.Getenv("HOST")
+	if production := os.Getenv("PRODUCTION"); production == "true" {
+		frontHost = os.Getenv("FRONT_HOST")
+	}
 
 	r.Use(cors.New(cors.Config{
 		// 許可したいHTTPメソッドの一覧
@@ -46,7 +50,7 @@ func router() {
 		},
 		// 許可したいアクセス元の一覧
 		AllowOrigins: []string{
-			host,
+			frontHost,
 		},
 	}))
 
@@ -77,7 +81,7 @@ func router() {
 		a.GET("/user", ctrl.User)
 	}
 
-	r.Run()
+	r.Run(":8080")
 }
 
 // マイグレーション
@@ -94,13 +98,13 @@ func seed() {
 	db := db.Connection()
 
 	// userのseed
-	count := 4
 	var user [4]string
 	user[0] = "曽倉 哲"
 	user[1] = "真具 莉都"
 	user[2] = "城 啓二"
 	user[3] = "ナシーム・ニコラス・タレブ"
 
+	count := 4
 	for i := 0; i < count; i++ {
 		name := user[i]
 		email := fmt.Sprintf("email%d@gmail.com", i+1)
@@ -117,7 +121,6 @@ func seed() {
 	}
 
 	// paperのseed
-	count = 15
 	var title [15]string
 	title[0] = "カント『純粋理性批判』における無限のアンチノミーについて"
 	title[1] = "プラトンのイデア論について"
@@ -152,7 +155,12 @@ func seed() {
 	abstract[13] = "ボルヘスは多様な無限をオブジェのように表現した。それらの無限を分類してみる。"
 	abstract[14] = "後期のナボコフの作品である『青白い炎』、『アーダ』、『透明な対象』を形而上学的に批評する。"
 
-	for i := 0; i < count; i++ {
+	paper := model.Paper{Title: title[0], Abstract: abstract[0], FileName: "file_name_1.pdf", UserId: 1}
+	if err := db.Create(&paper).Error; err != nil {
+		fmt.Printf("%+v", err)
+	}
+	count = 15
+	for i := 1; i < count; i++ {
 		rand.Seed(time.Now().UnixNano())
 		user_id := (rand.Intn(4)) + 1
 		file_name := fmt.Sprintf("file_name_%d.pdf", i+1)

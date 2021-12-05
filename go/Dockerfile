@@ -1,15 +1,16 @@
-FROM golang:1.16.0-alpine
+FROM --platform=linux/x86_64 golang:1.16.0-alpine
 
-WORKDIR /go/src/github.com/akimotokensaku/portfolio/go
+RUN mkdir /go/src/app
 
-COPY . .
+WORKDIR /go/src/app
 
+ADD . /go/src/app
+
+RUN apk update && apk add git 
+
+ENV TZ Asia/Tokyo
 ENV GO111MODULE=on
 # データベース接続のため
 ENV CGO_ENABLED=0
 
-RUN apk add git
-
-RUN go get -u github.com/cosmtrek/air
-
-CMD ["air", "-c", ".air.toml"]
+CMD ["go", "run", "main.go"]
