@@ -29,5 +29,3 @@ https://scholar-independent.com/
 
 ## インフラ構成図
 ![インフラ構成図 (4)](https://user-images.githubusercontent.com/89379855/144760714-2b05f7cb-0fbb-470c-b622-bffe58ae4a09.jpg)
-
-
