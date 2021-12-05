@@ -1,4 +1,7 @@
-.DS_Store
+.DS_Store/
 .vscode
 bin/
 pkg/
+go/.air.toml
+go/.env/
+db/
